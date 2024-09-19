@@ -5,8 +5,8 @@ from db import db
 class Player(db.Model):
     __tablename__ = 'player'
     id = db.Column(db.Integer, primary_key=True)
-    playerName = db.Column(db.String(80), unique=True, nullable=True)
-    team =db.Column(db.String(80), unique=True, nullable=True)
+    playerName = db.Column(db.String(80), nullable=True)
+    team =db.Column(db.String(80), nullable=True)
     position = db.Column(db.String(80), nullable=True)
     points = db.Column(db.Integer, nullable=True)
     season = db.Column(db.Integer, nullable=True)
@@ -14,9 +14,9 @@ class Player(db.Model):
     threePercent = db.Column(db.Double, nullable=True)
     turnovers = db.Column(db.Integer, nullable=True)
     assists = db.Column(db.Integer, nullable=True)
-    playerId = db.Column(db.String,unique=True, nullable=True)
-    ATR = db.Column(db.Integer, nullable=False)
-    PPG_Ratio = db.Column(db.Integer, nullable=False)
+    playerId = db.Column(db.String(80), nullable=True)
+    ATR = db.Column(db.Integer, nullable=True)
+    PPG_Ratio = db.Column(db.Integer, nullable=True)
 
     def __str__(self):
         return  (self.playerName,
@@ -30,11 +30,12 @@ class Player(db.Model):
                  )
 
 
-    def create_ATR(self, assists, turnovers):
-        self.ATR = assists / turnovers
+
+
+    def create_PPG(self,ppg):
+        self.PPG_Ratio = ppg
         db.session.commit()
-
-
+        db.session.refresh(self)
 
 
 

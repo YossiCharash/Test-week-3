@@ -24,12 +24,6 @@ def url_S():
 
 def create_player_to_db(player: dict):
 
-    new_player = player_db.Player(
-        playerName=['playerName'], playerId=player['playerId'],
-        team=player['team'], position=player['position'],
-        points=player['points'], season=player['season'],
-        twoPercent=player['twoPercent'], threePercent=player['threePercent'],
-        turnovers=player['turnovers'], assists=player['assists']
-    )
+    new_player = player_db.Player(playerName=player['playerName'], playerId=player['playerId'],team=player['team'], position=player['position'],points=player['points'], season=player['season'],twoPercent=player['twoPercent'], threePercent=player['threePercent'],turnovers=player['turnovers'], assists=player['assists'],ATR=None)
     db.session.add(new_player)
     db.session.commit()

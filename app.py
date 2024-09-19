@@ -5,7 +5,7 @@ from data_base.player_db import Player
 import requests
 from sqlalchemy.exc import IntegrityError
 from db import db
-from data_base.route import players
+from data_base.route_player import players
 from db import url_S
 
 app = Flask(__name__)
@@ -21,8 +21,9 @@ db.init_app(app)
 
 
 with app.app_context():
-    url_S()
     db.create_all()
+    # url_S()
+
 
 @app.errorhandler(IntegrityError)
 def handle_integrity_error(error):
